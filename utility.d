@@ -83,10 +83,10 @@ MMLCommand[][] parseMML(string mml, out MMLOption option)
 	mml = mml.toLower();
 	// コメントを除去
 	while (1) {
-		int ib = mml.indexOf("/*");
+		int ib = cast(int)mml.indexOf("/*");
 		if (ib < 0) break;
-		int ie = mml[ib + 2 .. $].indexOf("*/");
-		if (ie < 0) ie = mml.length;
+		int ie = cast(int)mml[ib + 2 .. $].indexOf("*/");
+		if (ie < 0) ie = cast(int)mml.length;
 		ie += ib + 4;
 		mml = mml[0 .. ib] ~ mml[ie .. $];
 	}
@@ -122,7 +122,7 @@ MMLCommand[][] parseMML(string mml, out MMLOption option)
 		if (tokens.length == 2) {
 			string symbol = tokens[0].strip();
 			string statements = tokens[1][0 .. $ - 1].strip();
-			int argsBegin = symbol.indexOf("{");
+			int argsBegin = cast(int)symbol.indexOf("{");
 			if (argsBegin > 0) {
 				string[] args = symbol[argsBegin + 1 .. $ - 1].split(regex(","));
 				symbol = symbol[0 .. argsBegin].strip();
@@ -130,7 +130,7 @@ MMLCommand[][] parseMML(string mml, out MMLOption option)
 					auto repm = mml.match(regex(r"\" ~ symbol ~ r"\{.*?\}", "g"));
 					if (!repm) break;
 					string target = repm.hit;
-					argsBegin = target.indexOf("{");
+					argsBegin = cast(int)target.indexOf("{");
 					string[] targetArgs = target[argsBegin + 1 .. $ - 1].split(regex(","));
 					string copy = statements;
 					for (int i = 0; i < args.length; i++) {

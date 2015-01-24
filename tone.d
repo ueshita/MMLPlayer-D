@@ -5,7 +5,7 @@ import std.math, std.random;
 class ToneGen
 {
 protected:
-	const float referenceFrequency = 220;
+	static const float referenceFrequency = 220;
 	int sampleRate = 0;
 
 	float v_frequency = 0;
